@@ -18,15 +18,27 @@ const numbers = [0, 15, -3, 9, null, 22, undefined, 8, NaN, false, 100];
 // and adding a new property `major` with the value "Computer Science".
 // Log `updatedStudent` to the console.
 
+const updatedStudent = { ...student, age: 21, major: "Computer Science" };
+console.log(updatedStudent);
+
 // Task 2: Nested Destructuring
 // Use nested destructuring to extract the firstName and lastName of the instructor from the `course` object
 // into variables `instructorFirstName` and `instructorLastName`.
 // Log `instructorFirstName` and `instructorLastName` to the console.
+const {
+  instructor: { firstName: instructorFirstName, lastName: instructorLastName },
+} = course;
+console.log(instructorFirstName, instructorLastName);
 
 // Task 3: Filtering and Truthiness
 // Write a function called `filterValidNumbers` that filters out all falsy values and any negative numbers
 // from the `numbers` array.
 // Call `filterValidNumbers` with `numbers` and log the result to the console.
+
+function filterValidNumbers(arr) {
+  return arr.filter((num) => !!num && num >= 0);
+}
+console.log(filterValidNumbers(numbers));
 
 // Task 4: Loop with Conditionals
 // Write a function called `analyzeStudentGrades` that takes an object representing a student
@@ -35,3 +47,21 @@ const numbers = [0, 15, -3, 9, null, 22, undefined, 8, NaN, false, 100];
 // If it's between 70 and 85, print "Good job, [Student Name]!".
 // If it's below 70, print "[Student Name], you need to improve.".
 // Call `analyzeStudentGrades` with the `updatedStudent` object.
+
+function analyzeStudentGrades(obj) {
+  let sum = 0;
+  for (let num of obj.grades) {
+    sum += num;
+  }
+  const average = sum / obj.grades.length;
+
+  if (average > 85) {
+    console.log(`Excellent performance, ${obj.name}!`);
+  } else if (average >= 70) {
+    console.log(`Good job, ${obj.name}!`);
+  } else {
+    console.log(`You need to improve ${obj.name}.`);
+  }
+}
+
+analyzeStudentGrades(updatedStudent);
